@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Arrays;
+
 public class Subject {
 
 	private String name;
@@ -12,12 +14,15 @@ public class Subject {
 
 	private int numberOfPracticesInAWeek;
 
-	public Subject(String name, Teacher lecturer, Teacher[] practicesTeachers, Student[] students, int numberOfPracticesInAWeek) {
+	private int numberOfLections;
+
+	public Subject(String name, Teacher lecturer, Teacher[] practicesTeachers, Student[] students, int numberOfPracticesInAWeek, int numberOfLectionsInAWeek) {
 		this.name = name;
 		this.lecturer = lecturer;
 		this.practicesTeachers = practicesTeachers;
 		this.students = students;
 		this.numberOfPracticesInAWeek = numberOfPracticesInAWeek;
+		this.numberOfLections = numberOfLectionsInAWeek;
 	}
 
 	public String getName() {
@@ -60,9 +65,23 @@ public class Subject {
 		this.numberOfPracticesInAWeek = numberOfPracticesInAWeek;
 	}
 
+	public int getNumberOfLectionsInAWeek() {
+		return numberOfLections;
+	}
+
+	public void setNumberOfLections(int numberOfLections) {
+		this.numberOfLections = numberOfLections;
+	}
+
 	@Override
 	public String toString() {
-		return "Subject ['" + name + "', lecturer: " + lecturer +
+		return "Subject[" +
+				"'" + name + '\'' +
+				", lecturer=" + lecturer +
+				", practicesTeachers=" + Arrays.toString(practicesTeachers) +
+				", students=" + Arrays.toString(students) +
+				", numberOfPracticesInAWeek=" + numberOfPracticesInAWeek +
+				", numberOfLections=" + numberOfLections +
 				']';
 	}
 }
