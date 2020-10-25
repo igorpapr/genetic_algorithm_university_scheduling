@@ -1,5 +1,6 @@
 package entity;
 
+//means university class (a.k.a lesson)
 public class Class {
 
 	private Subject subject;

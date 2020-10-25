@@ -1,5 +1,7 @@
 import entity.Chromosome;
 import entity.Subject;
+import utils.Logger;
+import utils.ScheduleUtils;
 
 import java.util.List;
 import java.util.Random;
@@ -36,38 +38,31 @@ public class Schedule {
     }
 
     /*
-     * Writes a string to the log
-     * */
-    public static void log(String message){
-        System.out.println( message );
-    }
-
-    /*
      * Creates an initial population
      * */
     public void createInitialPopulation(){
-        log("*** Started creating initial population...");
+        Logger.log("*** Started creating initial population...");
         for (int i = 0; i<POPULATION_COUNT;++i){
-            log("Creating chromosome number "+i);
-            population[i]=new Chromosome();
-            Chromosome.fillChromosomeWithRandomGenes(population[i]);
+            Logger.log("Creating chromosome number "+i);
+            population[i]=new Chromosome(subjects, GENES_COUNT);
+            population[i].fillChromosomeWithRandomGenes();
         }
-        log("*** FINISHED creating initial population...");
+        Logger.log("*** FINISHED creating initial population...");
     }
 
     /*
      * Iterate through all chromosomes and fill their "fitness" property
      * */
     private void fillChromosomesWithFitnesses(){
-        log( "***Started to create FITNESSES for all chromosomes. " );
+        Logger.log( "***Started to create FITNESSES for all chromosomes. " );
         for ( int i=0; i<POPULATION_COUNT;++i ){
-            log("Filling with fitness population number "+i);
+            Logger.log("Filling with fitness population number "+i);
             double currentFitness = population[i].calculateFitness();
             population[i].setFitness(currentFitness);
-            log("Fitness: "+population[i].getFitness());
+            Logger.log("Fitness: "+population[i].getFitness());
 
         }
-        log( "***Finished to create FITNESSES for all chromosomes. " );
+        Logger.log( "***Finished to create FITNESSES for all chromosomes. " );
     }
 
     /*
@@ -77,24 +72,24 @@ public class Schedule {
      * etc. etc.
      * */
     private int[][] getPairsForCrossover(){
-        log("*** Started looking for pairs for crossover");
+        Logger.log("*** Started looking for pairs for crossover");
         int[][] pairs = new int[POPULATION_COUNT][2];
         for (int i = 0; i<POPULATION_COUNT;++i){
-            log("Looking for pair number "+i+"...");
+            Logger.log("Looking for pair number "+i+"...");
             int firstChromosome =  findIndividualForCrossoverByTournament()   ;
-            log("First individual...  corresponding chromosome:"+firstChromosome+
+            Logger.log("First individual...  corresponding chromosome:"+firstChromosome+
                     "; chromosome's fitness*100: "+population[firstChromosome].getFitness()*100);
             int secondChromosome;
             do{
                 secondChromosome =  findIndividualForCrossoverByTournament()   ;
             }while (firstChromosome==secondChromosome) ;  //prevent individual's crossover with itself :)
 
-            log("Second individual...  corresponding chromosome:"+secondChromosome+
+            Logger.log("Second individual...  corresponding chromosome:"+secondChromosome+
                     "; chromosome's fitness*100: "+population[secondChromosome].getFitness()*100);
             pairs[i][0] = firstChromosome;
             pairs[i][1] = secondChromosome;
         }
-        log("*** Finished looking for pairs for crossover");
+        Logger.log("*** Finished looking for pairs for crossover");
         return pairs;
     }
 
@@ -104,20 +99,20 @@ public class Schedule {
      * */
     private int findIndividualForCrossoverByTournament(){
 
-        log( "starting findIndividualForCrossoverByTournament()" ) ;
+        Logger.log( "starting findIndividualForCrossoverByTournament()" ) ;
 
         int bestIndividualNumber=0;
         double bestFitness=0;
 
         for ( int i=0;i<TOURNAMENT_PARTICIPANTS_COUNT;++i ){
-            int currIndividualNumber = getRandomInt( 0 , POPULATION_COUNT-1);
+            int currIndividualNumber = ScheduleUtils.getRandomInt( 0 , POPULATION_COUNT-1);
 
             if ( population[ currIndividualNumber ].getFitness() > bestFitness    ){
                 bestFitness = population[ currIndividualNumber ].getFitness();
                 bestIndividualNumber = currIndividualNumber;
             }
 
-            log( "i="+i+"; currIndividualNumber="+currIndividualNumber+
+            Logger.log( "i="+i+"; currIndividualNumber="+currIndividualNumber+
                     "; bestFitness="+bestFitness+";bestIndividualNumeber="+bestIndividualNumber   );
 
         }
@@ -129,48 +124,32 @@ public class Schedule {
 
         Chromosome[] nextGeneration =new Chromosome[POPULATION_COUNT];
 
-        log("*******************************");
-        log("Starting performing Crossover operation For The Population...");
+        Logger.log("*******************************");
+        Logger.log("Starting performing Crossover operation For The Population...");
 
         //the best individual goes to the next generation in any case.
         //Please note that because of this we start the next loop from 1, not from 0
         nextGeneration[0] = findIndividualWithMaxFitness();
 
         for (int i = 1; i<POPULATION_COUNT;++i){
-            log(" Starting crossover #"+i);
+            Logger.log(" Starting crossover #"+i);
             Chromosome firstParent = population[  pairs[i][0]  ];
             Chromosome secondParent = population[  pairs[i][1]  ];
-            log("First parent (#"+pairs[i][0]+")\n" + firstParent );
-            log("Second parent (#"+pairs[i][1]+")\n" + secondParent );
+            Logger.log("First parent (#"+pairs[i][0]+")\n" + firstParent );
+            Logger.log("Second parent (#"+pairs[i][1]+")\n" + secondParent );
 
             Chromosome result = firstParent.singleCrossover( secondParent );
             nextGeneration[i]=result;
-            log( "Resulting (child) chromosome BEFORE the mutation:\n"+ nextGeneration[i]);
+            Logger.log( "Resulting (child) chromosome BEFORE the mutation:\n"+ nextGeneration[i]);
 
             nextGeneration[i]=nextGeneration[i].mutateWithGivenLikelihood();
 
-            log( "Resulting (child) chromosome AFTER the mutation:\n"+ nextGeneration[i]);
-            log(" Finished crossover #"+i);
+            Logger.log( "Resulting (child) chromosome AFTER the mutation:\n"+ nextGeneration[i]);
+            Logger.log(" Finished crossover #"+i);
         }
 
-        log("Finished performing Crossover operation For The Population...");
+        Logger.log("Finished performing Crossover operation For The Population...");
         return nextGeneration;
-    }
-
-    /*
-     * Returns random integer number between min and max ( all included :)  )
-     * */
-    public static int getRandomInt( int min, int max ){
-        Random randomGenerator;
-        randomGenerator = new Random();
-        return  randomGenerator.nextInt( max+1 ) + min ;
-    }
-
-    /*
-     * Returns random float number between min (included) and max ( NOT included :)  )
-     * */
-    public static float getRandomFloat( float min, float max ){
-        return  (float) (Math.random()*max + min) ;
     }
 
     public Chromosome findIndividualWithMaxFitness(){
@@ -203,8 +182,8 @@ public class Schedule {
 
     //main algorithm function
     public void findSolution(){
-        Schedule.log("POPULATION_COUNT=" + POPULATION_COUNT);
-        Schedule.log("GENES_COUNT=" + GENES_COUNT);
+        Logger.log("POPULATION_COUNT=" + POPULATION_COUNT);
+        Logger.log("GENES_COUNT=" + GENES_COUNT);
         createInitialPopulation();
         long iterationNumber = 0;
         do {
