@@ -1,7 +1,7 @@
-import entity.Chromosome;
 import entity.Student;
 import entity.Subject;
 import entity.Teacher;
+import schedule.Schedule;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +32,10 @@ public class Main {
 
 			new Student("Salo Sila"),
 			new Student("Sport Kyiv-Mohyla")
+	);
+
+	public static final List<Subject> SUBJECTS = Arrays.asList(
+
 	);
 
 

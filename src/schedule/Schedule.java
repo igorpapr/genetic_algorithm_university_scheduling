@@ -1,27 +1,50 @@
+package schedule;
+
 import entity.Chromosome;
+import entity.ClassTime;
+import entity.Classroom;
 import entity.Subject;
 import utils.Logger;
 import utils.ScheduleUtils;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class Schedule {
 
     //number of genes in a genome
-    public Integer GENES_COUNT;
+    private Integer GENES_COUNT;
 
     //number of individuals in population
     public static final int POPULATION_COUNT = 200;
-
-    //likelihood (in percent) of the mutation
-    public static final double MUTATION_LIKELIHOOD = .5;
 
     //number of individuals participating in tournament selection
     public static final int TOURNAMENT_PARTICIPANTS_COUNT = 5;
 
     //number of "generations".
     public static final int MAX_ITERATIONS = 200;
+
+    public static final List<ClassTime> CLASS_TIMES = Arrays.asList(
+            new ClassTime("1st class", LocalTime.of(8,30),LocalTime.of(9,50)),
+            new ClassTime("2nd class", LocalTime.of(10,0), LocalTime.of(11,20)),
+            new ClassTime("3nd class", LocalTime.of(11,40), LocalTime.of(13,0)),
+            new ClassTime("4nd class", LocalTime.of(13,30), LocalTime.of(14,50)),
+            new ClassTime("5nd class", LocalTime.of(15,0), LocalTime.of(16,20)),
+            new ClassTime("6nd class", LocalTime.of(16,30), LocalTime.of(17,50))
+    );
+
+    public static final List<Classroom> CLASSROOMS = Arrays.asList(
+            new Classroom(5,"1-222"),
+            new Classroom(10,"1-111"),
+            new Classroom(5,"3-310"),
+            new Classroom(8,"1-313"),
+            new Classroom(8,"1-331"),
+            new Classroom(5,"1-202"),
+            new Classroom(6,"1-140")
+    );
 
     //array of individuals (Chromosomes)
     private Chromosome[] population =new Chromosome[POPULATION_COUNT];
@@ -142,7 +165,7 @@ public class Schedule {
             nextGeneration[i]=result;
             Logger.log( "Resulting (child) chromosome BEFORE the mutation:\n"+ nextGeneration[i]);
 
-            nextGeneration[i]=nextGeneration[i].mutateWithGivenLikelihood();
+            nextGeneration[i].mutateWithGivenLikelihood();
 
             Logger.log( "Resulting (child) chromosome AFTER the mutation:\n"+ nextGeneration[i]);
             Logger.log(" Finished crossover #"+i);
