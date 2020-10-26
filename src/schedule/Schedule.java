@@ -80,10 +80,8 @@ public class Schedule {
         Logger.log( "***Started to create FITNESSES for all chromosomes. " );
         for ( int i=0; i<POPULATION_COUNT;++i ){
             Logger.log("Filling with fitness population number "+i);
-            double currentFitness = population[i].calculateFitness();
-            population[i].setFitness(currentFitness);
+            population[i].calculateFitness();
             Logger.log("Fitness: "+population[i].getFitness());
-
         }
         Logger.log( "***Finished to create FITNESSES for all chromosomes. " );
     }

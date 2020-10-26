@@ -15,10 +15,12 @@ public class Class {
 
 	private Student[] students;
 
+	private Classroom classroom;
+
 	public Class() {
 	}
 
-	public Class(Subject subject, ClassTime classTime, DayOfTheWeek dayOfTheWeek, boolean isLection, Teacher teacher, Student[] students) {
+	public Class(Subject subject, ClassTime classTime, DayOfTheWeek dayOfTheWeek, boolean isLection, Teacher teacher, Student[] students, Classroom classroom) {
 		this.subject = subject;
 		this.classTime = classTime;
 		this.dayOfTheWeek = dayOfTheWeek;
@@ -75,4 +77,11 @@ public class Class {
 		this.students = students;
 	}
 
+	public Classroom getClassroom() {
+		return classroom;
+	}
+
+	public void setClassroom(Classroom classroom) {
+		this.classroom = classroom;
+	}
 }
