@@ -218,4 +218,10 @@ public class Schedule {
         } while ( iterationNumber++<MAX_ITERATIONS );
     }
 
+    @Override
+    public String toString() {
+        return "Schedule[\n" +
+                  Arrays.toString(population) +
+                ']';
+    }
 }
