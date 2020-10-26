@@ -1,9 +1,6 @@
 package schedule;
 
-import entity.Chromosome;
-import entity.ClassTime;
-import entity.Classroom;
-import entity.Subject;
+import entity.*;
 import utils.Logger;
 import utils.ScheduleUtils;
 
@@ -19,13 +16,13 @@ public class Schedule {
     private Integer GENES_COUNT = 0;
 
     //number of individuals in population
-    public static final int POPULATION_COUNT = 200;
+    public static final int POPULATION_COUNT = 50;
 
     //number of individuals participating in tournament selection
     public static final int TOURNAMENT_PARTICIPANTS_COUNT = 5;
 
     //number of "generations".
-    public static final int MAX_ITERATIONS = 200;
+    public static final int MAX_ITERATIONS = 100;
 
     public static final List<ClassTime> CLASS_TIMES = Arrays.asList(
             new ClassTime("1st class", LocalTime.of(8,30),LocalTime.of(9,50)),
@@ -220,6 +217,7 @@ public class Schedule {
                 "RESULT: \nBEST GENERATION FITNESS: " + getPopulation()[0].getFitness() +
                 "\n ITERATIONS: " + iterationNumber +
                 "\n BEST GENERATION: "+ getPopulation()[0]);
+
     }
 
 }

@@ -75,7 +75,6 @@ public class Main {
 
 
         List<Subject> subjects = Arrays.asList(s1, s2, s3, s4);
-        //subjects.add(new Subject("English"));
         Schedule schedule = new Schedule(subjects);
         schedule.findSolution();
     }

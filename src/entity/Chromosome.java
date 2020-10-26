@@ -195,10 +195,26 @@ public class Chromosome {
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder("Chromosome:\n");
-                for (Class class1: genome){
-                    res.append(class1);
+        HashMap<DayOfTheWeek, LinkedHashMap<ClassTime, Class>> map = new HashMap<>();
+        for(DayOfTheWeek day: DayOfTheWeek.values()){
+            map.put(day, new LinkedHashMap<>());
+        }
+        for (Class class1: genome){
+            map.get(class1.getDayOfTheWeek()).put(class1.getClassTime(), class1);
+        }
+        for(DayOfTheWeek day1: DayOfTheWeek.values()){
+            res.append(day1);
+            res.append(": \n");
+            for(ClassTime time: Schedule.CLASS_TIMES){
+                if(map.get(day1).containsKey(time)){
+                    res.append(time);
+                    res.append(": \n");
+                    res.append(map.get(day1).get(time));
                 }
-                res.append(",\nfitness=").append(fitness).append(",\ngenesCount=").append(genesCount).append("]\n");
-                return res.toString();
+            }
+            res.append("----------");
+        }
+        res.append(",\nfitness=").append(fitness).append(",\ngenesCount=").append(genesCount).append("]\n");
+        return res.toString();
     }
 }
