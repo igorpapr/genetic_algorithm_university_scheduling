@@ -36,7 +36,7 @@ public class Chromosome {
         int index = 0;
         while(counter != genesCount){
             while(used.contains(index)){
-                index = ScheduleUtils.getRandomInt(0,subjectList.size());
+                index = ScheduleUtils.getRandomInt(0,subjectList.size()-1);
             }
             used.add(index);
             Subject s = subjectList.get(index);
@@ -110,9 +110,9 @@ public class Chromosome {
         Class res = new Class();
         res.setLection(isLection);
         res.setDayOfTheWeek(DayOfTheWeek.values()[ScheduleUtils.getRandomInt(0,DayOfTheWeek.values().length-1)]);
-        res.setClassTime(Schedule.CLASS_TIMES.get(ScheduleUtils.getRandomInt(0,Schedule.CLASS_TIMES.size())));
+        res.setClassTime(Schedule.CLASS_TIMES.get(ScheduleUtils.getRandomInt(0,Schedule.CLASS_TIMES.size() - 1)));
         res.setSubject(s);
-        res.setClassroom(Schedule.CLASSROOMS.get(ScheduleUtils.getRandomInt(0,Schedule.CLASSROOMS.size())));
+        res.setClassroom(Schedule.CLASSROOMS.get(ScheduleUtils.getRandomInt(0,Schedule.CLASSROOMS.size() - 1)));
         res.setTeacher(isLection?s.getLecturer():s.getPracticesTeachers()[ScheduleUtils.getRandomInt(0,s.getPracticesTeachers().length-1)]);
 
         if(isLection){
@@ -193,6 +193,16 @@ public class Chromosome {
 
     public void setFitness(double fitness) {
         this.fitness = fitness;
+    }
+
+    @Override
+    public String toString() {
+        return "Chromosome[" +
+                "genome=" + Arrays.toString(genome) +
+                ", fitness=" + fitness +
+                ", subjectList=" + subjectList +
+                ", genesCount=" + genesCount +
+                "]\n";
     }
 
     public List<Subject> getSubjectList() {

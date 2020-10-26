@@ -16,7 +16,7 @@ import java.util.Random;
 public class Schedule {
 
     //number of genes in a genome
-    private Integer GENES_COUNT;
+    private Integer GENES_COUNT = 0;
 
     //number of individuals in population
     public static final int POPULATION_COUNT = 200;
@@ -215,7 +215,11 @@ public class Schedule {
             Chromosome[] nextGeneration;
             nextGeneration = performCrossoverAndMutationForThePopulationAndGetNextGeneration(  pairs );
             setPopulation(nextGeneration);
-        } while ( iterationNumber++<MAX_ITERATIONS );
+        } while ( iterationNumber++<MAX_ITERATIONS);
+        System.out.println("============================\n" +
+                "RESULT: \nBEST GENERATION FITNESS: " + getPopulation()[0].getFitness() +
+                "\n ITERATIONS: " + iterationNumber +
+                "\n BEST GENERATION: "+ getPopulation()[0]);
     }
 
     @Override

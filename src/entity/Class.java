@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Arrays;
+
 //means university class (a.k.a lesson)
 public class Class {
 
@@ -83,5 +85,18 @@ public class Class {
 
 	public void setClassroom(Classroom classroom) {
 		this.classroom = classroom;
+	}
+
+	@Override
+	public String toString() {
+		return "Class[" +
+				"subject=" + subject +
+				", classTime=" + classTime +
+				", dayOfTheWeek=" + dayOfTheWeek +
+				", isLection=" + isLection +
+				", teacher=" + teacher +
+				", students=" + Arrays.toString(students) +
+				", classroom=" + classroom +
+				"]\n";
 	}
 }
