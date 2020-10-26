@@ -192,33 +192,13 @@ public class Chromosome {
         return fitness;
     }
 
-    public void setFitness(double fitness) {
-        this.fitness = fitness;
-    }
-
     @Override
     public String toString() {
-        return "\nChromosome[" +
-                "genome=" + Arrays.toString(genome) +
-                ",\nfitness=" + fitness +
-                ",\nsubjectList=" + subjectList +
-                ",\ngenesCount=" + genesCount +
-                "]";
-    }
-
-    public List<Subject> getSubjectList() {
-        return subjectList;
-    }
-
-    public void setSubjectList(List<Subject> subjectList) {
-        this.subjectList = subjectList;
-    }
-
-    public Integer getGenesCount() {
-        return genesCount;
-    }
-
-    public void setGenesCount(Integer genesCount) {
-        this.genesCount = genesCount;
+        StringBuilder res = new StringBuilder("Chromosome:\n");
+                for (Class class1: genome){
+                    res.append(class1);
+                }
+                res.append(",\nfitness=").append(fitness).append(",\ngenesCount=").append(genesCount).append("]\n");
+                return res.toString();
     }
 }

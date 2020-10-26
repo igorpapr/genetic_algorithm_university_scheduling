@@ -30,10 +30,10 @@ public class Schedule {
     public static final List<ClassTime> CLASS_TIMES = Arrays.asList(
             new ClassTime("1st class", LocalTime.of(8,30),LocalTime.of(9,50)),
             new ClassTime("2nd class", LocalTime.of(10,0), LocalTime.of(11,20)),
-            new ClassTime("3nd class", LocalTime.of(11,40), LocalTime.of(13,0)),
-            new ClassTime("4nd class", LocalTime.of(13,30), LocalTime.of(14,50)),
-            new ClassTime("5nd class", LocalTime.of(15,0), LocalTime.of(16,20)),
-            new ClassTime("6nd class", LocalTime.of(16,30), LocalTime.of(17,50))
+            new ClassTime("3rd class", LocalTime.of(11,40), LocalTime.of(13,0)),
+            new ClassTime("4th class", LocalTime.of(13,30), LocalTime.of(14,50)),
+            new ClassTime("5th class", LocalTime.of(15,0), LocalTime.of(16,20)),
+            new ClassTime("6th class", LocalTime.of(16,30), LocalTime.of(17,50))
     );
 
     public static final List<Classroom> CLASSROOMS = Arrays.asList(
@@ -222,10 +222,4 @@ public class Schedule {
                 "\n BEST GENERATION: "+ getPopulation()[0]);
     }
 
-    @Override
-    public String toString() {
-        return "Schedule[\n" +
-                  Arrays.toString(population) +
-                ']';
-    }
 }

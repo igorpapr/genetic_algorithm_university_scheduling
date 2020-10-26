@@ -89,14 +89,17 @@ public class Class {
 
 	@Override
 	public String toString() {
-		return "\nClass[" +
-				"subject=" + subject +
-				", classTime=" + classTime +
-				", dayOfTheWeek=" + dayOfTheWeek +
-				", isLection=" + isLection +
-				", teacher=" + teacher +
-				", students=" + Arrays.toString(students) +
-				", classroom=" + classroom +
-				"]";
+		String res = "==================\n" +
+				"Class[" +
+				subject +
+				" | ClassTime=" + classTime +
+				" | DayOfTheWeek=" + dayOfTheWeek +
+				" | Classroom=" + classroom +
+				" | IsLection=" + isLection +
+				"\nTeacher=" + teacher +
+				"\nStudents: " + Arrays.toString(students) +
+				"]\n" +
+				"=====================\n";
+		return res;
 	}
 }

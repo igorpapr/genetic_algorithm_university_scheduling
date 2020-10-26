@@ -77,11 +77,8 @@ public class Subject {
 	public String toString() {
 		return "Subject[" +
 				"'" + name + '\'' +
-				", lecturer=" + lecturer +
-				", practicesTeachers=" + Arrays.toString(practicesTeachers) +
-				", students=" + Arrays.toString(students) +
 				", numberOfPracticesInAWeek=" + numberOfPracticesInAWeek +
 				", numberOfLections=" + numberOfLections +
-				']';
+				"]\n";
 	}
 }
