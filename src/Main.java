@@ -9,40 +9,74 @@ import java.util.List;
 
 public class Main {
 
-	public static final List<Teacher> TEACHERS = Arrays.asList(
-			new Teacher("Vozniuk Yaroslav"),
-			new Teacher("Dr.Vasia Pupkin"),
-			new Teacher("Fizruk Zabukhovich"),
-			new Teacher("Trudovik Alkoholevich"),
+    public static void main(String[] args) {
+        Teacher t1 = new Teacher("Vozniuk Yaroslav");
+        Teacher t2 = new Teacher("Dr.Vasia Pupkin");
 
-			new Teacher("Pidpyshys' Na"),
-			new Teacher("Troshu @trosha_b")
-	);
-	public static final List<Student> STUDENTS = Arrays.asList(
-			new Student("Petro Petrov"),
-			new Student("Andrii Andriev"),
-			new Student("Ihor Igorischevich"),
-			new Student("Grisha Grigoriev"),
-			new Student("Vasil Vasiliov"),
-			new Student("Slava Ukraini"),
-			new Student("Heroyam Slava"),
-			new Student("Please follow"),
-			new Student("My instagram"),
-			new Student("@daaamn.paprocya"),
+        Teacher t3 = new Teacher("Fizruk Zabukhovich");
+        Teacher t4 = new Teacher("Trudovik Alkoholevich");
 
-			new Student("Salo Sila"),
-			new Student("Sport Kyiv-Mohyla")
-	);
+        Teacher t5 = new Teacher("Pidpyshys' Na");
+        Teacher t6 = new Teacher("Troshu @trosha_b");
 
-	public static final List<Subject> SUBJECTS = Arrays.asList(
+        Teacher t7 = new Teacher("A takozh na");
+        Teacher t8 = new Teacher("@alex.lzv");
+//        List<Teacher> TEACHERS = Arrays.asList(t1, t2, t3, t4, t5, t6);
 
-	);
+        Student st1 = new Student("Petro Petrov");
+        Student st2 = new Student("Andrii Andriev");
+        Student st3 = new Student("Ihor Igorischevich");
+        Student st4 = new Student("Grisha Grigoriev");
+        Student st5 = new Student("Vasil Vasiliov");
+        Student st6 = new Student("Slava Ukraini");
+        Student st7 = new Student("Heroyam Slava");
+        Student st8 = new Student("Please follow");
+        Student st9 = new Student("My instagram");
+        Student st10 = new Student("@daaamn.paprocya");
+//        Student st11 = new Student("Salo Sila");
+//        Student st12 = new Student("Sport Kyiv-Mohyla");
+//        List<Student> STUDENTS = Arrays.asList(st1, st2, st3, st4, st5, st6, st7, st8, st9, st10);
+
+        Subject s1 = new Subject(
+                "Analysis",
+                t1,
+                new Teacher[]{t1, t2},
+                new Student[]{st1, st2, st3, st4},
+                1,
+                1
+        );
+
+        Subject s2 = new Subject(
+                "Proga",
+                t3,
+                new Teacher[]{t3, t4},
+                new Student[]{st3, st4, st5, st6},
+                2,
+                1
+        );
+
+        Subject s3 = new Subject(
+                "Fizra",
+                t5,
+                new Teacher[]{t5, t6},
+                new Student[]{st5, st6, st7, st8},
+                1,
+                0
+        );
+
+        Subject s4 = new Subject(
+                "Algebra",
+                t7,
+                new Teacher[]{t7, t8},
+                new Student[]{st7, st8, st9, st10},
+                2,
+                1
+        );
 
 
-	public static void main(String[] args){
-		List<Subject> subjects = new ArrayList<>();
-		//subjects.add(new Subject("English"));
-		Schedule schedule = new Schedule(subjects);
-
-	}
+        List<Subject> subjects = Arrays.asList(s1, s2, s3, s4);
+        //subjects.add(new Subject("English"));
+        Schedule schedule = new Schedule(subjects);
+        schedule.findSolution();
+    }
 }
