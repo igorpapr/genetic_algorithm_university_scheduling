@@ -137,6 +137,7 @@ public class Chromosome {
         - A classroom must have enough seats for the class
      */
     public void  calculateFitness(){
+        fitness = 0;
         for (Class itemCurrent : genome) {
             for (Class itemThat : genome) {
                 if (itemCurrent != itemThat) {
@@ -197,12 +198,12 @@ public class Chromosome {
 
     @Override
     public String toString() {
-        return "Chromosome[" +
+        return "\nChromosome[" +
                 "genome=" + Arrays.toString(genome) +
-                ", fitness=" + fitness +
-                ", subjectList=" + subjectList +
-                ", genesCount=" + genesCount +
-                "]\n";
+                ",\nfitness=" + fitness +
+                ",\nsubjectList=" + subjectList +
+                ",\ngenesCount=" + genesCount +
+                "]";
     }
 
     public List<Subject> getSubjectList() {
